@@ -12,3 +12,7 @@ dist
 
 # Backpack build
 build
+
+# config file
+config.js
+
