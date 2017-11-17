@@ -21,7 +21,7 @@ module.exports = {
   ** Add axios globally
   */
   build: {
-    vendor: ['axios'],
+    vendor: ['axios', 'vue-i18n'],
     /*
     ** Run ESLINT on save
     */
@@ -35,5 +35,9 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  router: {
+    middleware: 'i18n'
+  },
+  plugins: ['~/plugins/i18n.js']
 }

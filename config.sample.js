@@ -5,6 +5,7 @@ const Server = {
 }
 
 const Client = {
-
+  lang: 'ja',
+  ga: ''
 }
 export {Server, Client}
