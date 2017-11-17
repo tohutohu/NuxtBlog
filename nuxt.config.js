@@ -1,3 +1,4 @@
+const {Client} = require('./config')
 module.exports = {
   /*
   ** Headers of the page
@@ -40,16 +41,21 @@ module.exports = {
     middleware: 'i18n'
   },
   plugins: [
-    {src: '~/plugins/i18n.js'},
-    {src: '~/plugins/ga.js', ssr: false}
+    {src: '~/plugins/i18n.js'}
   ],
 
   modules: [
-    '@nuxtjs/toast'
-  ],
+    ['@nuxtjs/toast',
+      {
+        position: 'top-center',
+        duaration: 3000
+      }
+    ],
+    ['@nuxtjs/google-analytics',
+      {
+        id: Client.ga
+      }
+    ]
+  ]
 
-  toast: {
-    position: 'top-center',
-    duaration: 3000
-  }
 }
