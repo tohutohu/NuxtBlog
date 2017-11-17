@@ -1,12 +1,26 @@
 import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
 import {Server} from '../config'
+import bodyParser from 'body-parser'
+import session from 'express-session'
 
 import api from './api'
 
 const app = express()
 const host = process.env.HOST || Server.host || '127.0.0.1'
 const port = process.env.PORT || Server.port || 3000
+
+app.use(bodyParser.json())
+app.use(session({
+  secret: 'aaa',
+  resave: false,
+  saveUninitialized: false,
+  rolling: true,
+  cookie: {
+    maxAge: 60000,
+    secure: true
+  }
+}))
 
 app.set('port', port)
 
