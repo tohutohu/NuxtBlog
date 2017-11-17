@@ -1,5 +1,5 @@
 /* eslint-disable */
-import router from '~router'
+// import router from '~router'
 import {Client} from '../config'
 /*
 ** クライアントサイドかつプロダクションモードでのみ実行

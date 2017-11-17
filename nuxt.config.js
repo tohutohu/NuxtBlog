@@ -39,5 +39,17 @@ module.exports = {
   router: {
     middleware: 'i18n'
   },
-  plugins: ['~/plugins/i18n.js']
+  plugins: [
+    {src: '~/plugins/i18n.js'},
+    {src: '~/plugins/ga.js', ssr: false}
+  ],
+
+  modules: [
+    '@nuxtjs/toast'
+  ],
+
+  toast: {
+    position: 'top-center',
+    duaration: 3000
+  }
 }
