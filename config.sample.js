@@ -4,7 +4,14 @@ const Server = {
   port: '3000',
   user: 'tohutohu',
   pass: 'soy',
-  cookieSecret: 'daizu'
+  cookieSecret: 'daizu',
+  mongo: {
+    host: 'localhost',
+    port: '27017',
+    user: 'nuxt',
+    pass: 'blog',
+    db: 'NuxtBlog'
+  }
 }
 
 const Client = {

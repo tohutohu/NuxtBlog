@@ -2,7 +2,7 @@
 <div>
   <input type="text" name="user" v-model="form.user">
   <input type="password" name="pass" v-model="form.pass">
-  <input type="submit" @click="$store.dispatch('login', form)">
+  <input type="submit" @click="$store.dispatch('login', form)" value="$t('loginButton')">
 </div>
 </template>
 
