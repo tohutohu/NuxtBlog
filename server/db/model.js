@@ -19,6 +19,7 @@ const articleSchema = new Schema({
   body: String,
   published: Date,
   lastModified: Date,
+  state: String,
   thumbnailURL: String
 })
 articleSchema.plugin(autoIncrement.plugin, {

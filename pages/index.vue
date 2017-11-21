@@ -1,48 +1,54 @@
 <template>
   <section class="container">
-    <img src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
     <h1 class="title">
-      USERS
+      POSTS
     </h1>
-    <ul class="users">
-      <li v-for="(user, index) in users" :key="index" class="user">
-        <nuxt-link :to="{ name: 'id', params: { id: index }}">
-          {{ user.name }}
+    <div>
+      <div class="article-container" v-for="article in articles">
+        <nuxt-link :to="'/posts/' + article.id">
+          <div class="article-title">{{article.title}}</div>
         </nuxt-link>
-      </li>
-    </ul>
+        <div class="article-tags" v-for="tag in article.tags" v-if="article.tags.length > 0">
+          <div>{{tag}}</div>
+        </div>
+        <div class="date">
+          {{article.published | date}}
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
 import axios from '~/plugins/axios'
+import moment from 'moment'
 
 export default {
   async asyncData () {
-    let { data } = await axios.get('/api/users')
-    return { users: data }
+    let { data } = await axios.get('/api/articles')
+    return data
   },
   head () {
     return {
       title: 'Users'
     }
+  },
+  filters: {
+    date (val) {
+      return moment(val).format('YYYY-MM-DD')
+    }
   }
 }
 </script>
 
-<style scoped>
-.title
+<style >
+.container
 {
-  margin: 30px 0;
+  padding: 60px 0 !important;
 }
-.users
-{
-  list-style: none;
-  margin: 0;
-  padding: 0;
+
+.title {
+  padding-bottom: 25px;
 }
-.user
-{
-  margin: 10px 0;
-}
+
 </style>

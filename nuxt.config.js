@@ -22,7 +22,7 @@ module.exports = {
   ** Add axios globally
   */
   build: {
-    vendor: ['axios', 'vue-i18n'],
+    vendor: ['axios', 'vue-i18n', 'mavon-editor'],
     /*
     ** Run ESLINT on save
     */

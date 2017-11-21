@@ -21,13 +21,14 @@ router.post('/logout', (req, res) => {
 router.use((req, res, next) => {
   if (!req.session.authUser) {
     res.status(401).json({error: 'authentication fail'})
+    return
   }
   next()
 })
 
 router.get('/articles', async (req, res) => {
   const articles = await Article.find({})
-  return res.json(articles)
+  return res.json(articles || {})
 })
 
 router.post('/articles', async (req, res) => {
@@ -38,6 +39,7 @@ router.post('/articles', async (req, res) => {
     body: req.body.body,
     thumbnailURL: req.body.thumbnailURL,
     published: req.body.state === 'publish' ? Date.now() : null,
+    state: req.body.state,
     lastModified: Date.now()
   })
   newArticle.save((err) => {

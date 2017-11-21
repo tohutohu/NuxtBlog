@@ -6,5 +6,6 @@ let options = {}
 if (process.server) {
   options.baseURL = `${Server.scheme || 'http'}://${process.env.HOST || Server.host || 'localhost'}:${process.env.PORT || Server.port || 3000}`
 }
+options.withCredentials = true
 
 export default axios.create(options)
