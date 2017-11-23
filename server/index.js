@@ -46,7 +46,7 @@ app.use(nuxt.render)
 if (process.env.BUILD) {
   nuxt.plugin('generator', generator => {
     generator.plugin('generateRoutes', ({generateRoutes}) => {
-      generateRoutes.push('/')
+      generateRoutes.push('/', '404')
     })
   })
 }

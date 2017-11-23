@@ -32,7 +32,7 @@ export default {
 
 <style>
 .article-container {
-  padding: 10px 25px 20px 25px;
+  padding: 12px 24px 18px 25px;
 }
 
 .article-title {
