@@ -1,5 +1,5 @@
 import express from 'express'
-import { Nuxt, Builder } from 'nuxt'
+import { Nuxt, Builder, Generator } from 'nuxt'
 import {Server} from '../config'
 import bodyParser from 'body-parser'
 import session from 'express-session'
@@ -44,5 +44,21 @@ if (config.dev) {
 app.use(nuxt.render)
 
 // Listen the server
-app.listen(port, host)
+app.listen(port, host, () => {
+  if (process.env.BUILD) {
+    const builder = new Builder(nuxt)
+    const generator = new Generator(nuxt, builder)
+    generator.generate({
+      init: true
+    })
+      .then(res => {
+        console.log('DONE!!!!\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n', res)
+        process.exit(0)
+      })
+      .catch(err => {
+        console.log('ERROR!!!!\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n', err)
+        process.exit(1)
+      })
+  }
+})
 console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console

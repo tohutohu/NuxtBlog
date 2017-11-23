@@ -1,6 +1,6 @@
 import axios from '@@/plugins/axios'
 const actions = {
-  nuxtServerInit ({ commit }, { req }) {
+  nuxtServerInits ({ commit }, { req }) {
     if (req.session && req.session.authUser) {
       commit('SET_USER', req.session.authUser)
     }

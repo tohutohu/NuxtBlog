@@ -24,7 +24,10 @@ import axios from '~/plugins/axios'
 import moment from 'moment'
 
 export default {
-  async asyncData () {
+  async asyncData ({payload}) {
+    if (payload) {
+      return payload
+    }
     let { data } = await axios.get('/api/articles')
     return data
   },

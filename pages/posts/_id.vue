@@ -11,7 +11,10 @@ import VueMarkdown from 'vue-markdown'
 
 export default {
   name: 'Post',
-  async asyncData ({params}) {
+  async asyncData ({params, payload}) {
+    if (payload) {
+      return payload
+    }
     const { data } = await axios.get('/api/articles/' + params.id)
     return data
   },
