@@ -1,5 +1,5 @@
-import { Router } from 'express'
-import {Article} from '../db/model'
+const { Router } = require('express')
+const {Article} = require('../db/model')
 
 const router = Router()
 
@@ -23,5 +23,4 @@ router.get('/articles/:id', async (req, res) => {
   }
   res.json(data)
 })
-
-export default router
+module.exports = router

@@ -1,6 +1,6 @@
-import { Router } from 'express'
-import {Server} from '../../config'
-import {Article} from '../db/model'
+const { Router } = require('express')
+const {Server} = require('../../config')
+const {Article} = require('../db/model')
 
 const router = Router()
 
@@ -80,4 +80,4 @@ router.post('/articles/:id', async (req, res) => {
   res.json(article)
 })
 
-export default router
+module.exports = router

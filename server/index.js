@@ -1,10 +1,10 @@
-import express from 'express'
-import { Nuxt, Builder, Generator } from 'nuxt'
-import {Server} from '../config'
-import bodyParser from 'body-parser'
-import session from 'express-session'
-
-import api from './api'
+const express = require('express')
+const { Nuxt, Builder, Generator } = require('nuxt')
+const {Server} = require('../config')
+const bodyParser = require('body-parser')
+const session = require('express-session')
+const {waitConnect} = require('./db/model')
+const api = require('./api')
 
 const app = express()
 const host = process.env.HOST || Server.host || '127.0.0.1'
@@ -43,13 +43,23 @@ if (config.dev) {
 // Give nuxt middleware to express
 app.use(nuxt.render)
 
+if (process.env.BUILD) {
+  nuxt.plugin('generator', generator => {
+    generator.plugin('generateRoutes', ({generateRoutes}) => {
+      generateRoutes.push('/')
+    })
+  })
+}
+
 // Listen the server
-app.listen(port, host, () => {
+app.listen(port, host, async () => {
+  await waitConnect()
   if (process.env.BUILD) {
     const builder = new Builder(nuxt)
     const generator = new Generator(nuxt, builder)
     generator.generate({
-      init: true
+      init: true,
+      build: false
     })
       .then(res => {
         console.log('DONE!!!!\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n', res)

@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
-import autoIncrement from 'mongoose-auto-increment'
-import {Server} from '../../config'
+const mongoose = require('mongoose')
+const autoIncrement = require('mongoose-auto-increment')
+const {Server} = require('../../config')
 const Schema = mongoose.Schema
 
 const auth = !!(Server.user && Server.pass)
@@ -9,6 +9,11 @@ const url = `mongodb://${Server.mongo.user}${auth ? ':' : ''}${Server.mongo.pass
 
 console.log(url)
 const mongo = mongoose.createConnection(url)
+let connected = false
+mongo.on('open', () => {
+  connected = true
+  console.log('Mongodb connected!')
+})
 autoIncrement.initialize(mongo)
 
 const articleSchema = new Schema({
@@ -30,5 +35,11 @@ articleSchema.plugin(autoIncrement.plugin, {
 })
 
 const Article = mongo.model('Article', articleSchema)
+const waitConnect = async () => {
+  if (!connected) {
+    console.log('waiting connect mongo ...')
+    await new Promise(resolve => mongo.on('open', resolve))
+  }
+}
 
-export {Article}
+module.exports = {Article, waitConnect}

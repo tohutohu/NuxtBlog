@@ -1,5 +1,11 @@
-const {Client, Server} = require('./config')
-const axios = require('axios')
+const {Client} = require('./config')
+let Article
+if (process.env.NODE_ENV === 'production' && process.env.BUILD) {
+  const {_Article} = require('./server/db/model')
+  Article = _Article
+}
+const isBuild = process.env.BUILD === 'true'
+console.log('Build:', isBuild)
 module.exports = {
   /*
   ** Headers of the page
@@ -37,6 +43,9 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+      if (isBuild) {
+        config.devtool = '#eval'
+      }
     }
   },
   router: {
@@ -62,12 +71,20 @@ module.exports = {
 
   generate: {
     routes () {
-      return axios.get(`http://localhost:${Server.port || 3000}/api/articles`)
+      return Article.find({state: 'publish'}).select({id: 1})
         .then(res => {
-          res.data.map(article => {
+          console.log(res)
+          return res.map(article => {
             return '/posts/' + article.id
           })
         })
     }
+  },
+
+  minify: {
+    removeAttributeQuotes: true,
+    removeComments: true,
+    sortAttributes: false,
+    sortClassName: false
   }
 }

@@ -4,6 +4,7 @@ const Server = {
   port: '3000',
   user: 'tohutohu',
   pass: 'soy',
+  autoGenerate: true,
   cookieSecret: 'daizu',
   mongo: {
     host: 'localhost',
