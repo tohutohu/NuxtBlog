@@ -17,6 +17,7 @@
   justify-content: space-between;
   border: 1px solid #3b4045;
   border-bottom: none;
+  padding: 0 20px;
 }
 
 .my-nav ul {
