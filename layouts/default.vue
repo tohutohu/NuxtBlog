@@ -1,7 +1,9 @@
 <template>
   <div>
     <my-header></my-header>
-    <nuxt/>
+    <div class="main">
+      <nuxt/>
+    </div>
     <my-footer/>
   </div>
 </template>
@@ -19,6 +21,10 @@ export default {
 </script>
 
 <style>
+.main {
+  display: flex;
+  justify-content: center;
+}
 .container
 {
   margin: 0;

@@ -11,7 +11,7 @@ options.withCredentials = true
 
 const instance = axios.create(options)
 
-if (process.browser && process.static) {
+if (process.browser && process.env.static) {
   instance.interceptors.request.use(config => {
     config.url = config.url + '.json'
     return config

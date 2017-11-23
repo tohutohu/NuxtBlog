@@ -24,6 +24,7 @@ import axios from '~/plugins/axios'
 import moment from 'moment'
 
 export default {
+  transition: 'slide-fade',
   async asyncData ({payload}) {
     if (payload) {
       return payload
@@ -33,7 +34,7 @@ export default {
   },
   head () {
     return {
-      title: 'Users'
+      title: 'とーふとふのブログ'
     }
   },
   filters: {

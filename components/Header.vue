@@ -1,8 +1,10 @@
 <template>
 <header class="my-header">
-<div class="blog-name">{{name}}</div>
-<div class="catch-copy">{{catchCopy}}</div>
-<my-nav></my-nav>
+  <div class="header-container">
+    <div class="blog-name">{{name}}</div>
+    <div class="catch-copy">{{catchCopy}}</div>
+  </div>
+  <my-nav></my-nav>
 </header>
 </template>
 <script>
@@ -22,8 +24,16 @@ export default {
 
 <style>
 .my-header {
-  height: 240px;
   background-color: #26272b;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.header-container {
+  width: 100%;
+  max-width: 766px;
+  margin: 0 auto;
 }
 
 .blog-name, .catch-copy {
@@ -34,14 +44,12 @@ export default {
 .blog-name {
   font-size: 35px;
   font-weight: 700;
-  padding: 50px 0 30px 18px;
-  padding-left: 13%;
+  padding: 48px 12px 12px 12px;
 }
 
 .catch-copy {
   font-size: 20px;
-  padding: 0 0 20px 150px;
-  padding-left: 22%;
+  padding: 6px 36px 12px 180px;
 }
 
 </style>

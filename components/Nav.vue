@@ -1,10 +1,12 @@
 <template>
 <nav class="my-nav">
-  <ul>
-    <li>
-      <router-link class="my-nav-menu" to="/">Top</router-link>
-    </li>
-  </ul>
+  <div class="my-nav-container">
+    <ul>
+      <li>
+        <router-link class="my-nav-menu" to="/">Top</router-link>
+      </li>
+    </ul>
+  </div>
 </nav>
 </template>
 
@@ -14,10 +16,16 @@
   margin: 0 auto;
   background-color: #33363b;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   border: 1px solid #3b4045;
   border-bottom: none;
   padding: 0 20px;
+  width: 100%;
+}
+
+.my-nav-container {
+  max-width: 766px;
+  width:100%;
 }
 
 .my-nav ul {
