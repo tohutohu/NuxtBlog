@@ -43,13 +43,13 @@ if (config.dev) {
 // Give nuxt middleware to express
 app.use(nuxt.render)
 
-if (process.env.BUILD) {
-  nuxt.plugin('generator', generator => {
-    generator.plugin('generateRoutes', ({generateRoutes}) => {
-      generateRoutes.push('/')
-    })
-  })
-}
+// if (process.env.BUILD) {
+//  nuxt.plugin('generator', generator => {
+//    generator.plugin('generateRoutes', ({generateRoutes}) => {
+//      generateRoutes.push('/')
+//    })
+//  })
+// }
 
 // Listen the server
 app.listen(port, host, async () => {
@@ -59,7 +59,7 @@ app.listen(port, host, async () => {
     const generator = new Generator(nuxt, builder)
     generator.generate({
       init: true,
-      build: false
+      build: true
     })
       .then(res => {
         console.log('DONE!!!!\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n', res)
