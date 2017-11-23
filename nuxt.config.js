@@ -1,8 +1,9 @@
 const {Client} = require('./config')
 let Article
 if (process.env.NODE_ENV === 'production' && process.env.BUILD) {
-  const {_Article} = require('./server/db/model')
-  Article = _Article
+  console.log('Generate!')
+  const models = require('./server/db/model')
+  Article = models.Article
 }
 const isBuild = process.env.BUILD === 'true'
 console.log('Build:', isBuild)
@@ -73,7 +74,6 @@ module.exports = {
     routes () {
       return Article.find({state: 'publish'}).select({id: 1})
         .then(res => {
-          console.log(res)
           return res.map(article => {
             return '/posts/' + article.id
           })
