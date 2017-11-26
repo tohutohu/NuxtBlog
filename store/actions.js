@@ -1,10 +1,5 @@
 import axios from '@@/plugins/axios'
 const actions = {
-  nuxtServerInits ({ commit }, { req }) {
-    if (req.session && req.session.authUser) {
-      commit('SET_USER', req.session.authUser)
-    }
-  },
   login ({ commit }, form) {
     return axios({
       // クライアントのクッキーをサーバーに送信
@@ -42,6 +37,14 @@ const actions = {
       .then(() => {
         commit('SET_USER', null)
       })
+  }
+}
+
+if (!process.env.static) {
+  actions.nuxtServerInit = ({ commit }, { req }) => {
+    if (req.session && req.session.authUser) {
+      commit('SET_USER', req.session.authUser)
+    }
   }
 }
 

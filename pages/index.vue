@@ -4,7 +4,7 @@
       POSTS
     </h1>
     <div>
-      <div class="article-container" v-for="article in articles">
+      <div class="article-container top" v-for="article in articles">
         <nuxt-link :to="'/posts/' + article.id">
           <div class="article-title">{{article.title}}</div>
         </nuxt-link>
@@ -51,6 +51,10 @@ export default {
   width: 100%;
   max-width: 765px;
   padding: 60px 0 !important;
+}
+.top {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
 }
 
 .title {

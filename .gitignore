@@ -16,3 +16,4 @@ build
 # config file
 config.js
 
+static/vender

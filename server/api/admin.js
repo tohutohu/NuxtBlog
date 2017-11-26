@@ -18,13 +18,15 @@ router.post('/logout', (req, res) => {
   res.json({ ok: true })
 })
 
-router.use((req, res, next) => {
-  if (!req.session.authUser) {
-    res.status(401).json({error: 'authentication fail'})
-    return
-  }
-  next()
-})
+if (process.env.NODE_ENV === 'production') {
+  router.use((req, res, next) => {
+    if (!req.session.authUser) {
+      res.status(401).json({error: 'authentication fail'})
+      return
+    }
+    next()
+  })
+}
 
 router.get('/articles', async (req, res) => {
   const articles = await Article.find({})

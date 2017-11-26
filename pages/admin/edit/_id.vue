@@ -2,7 +2,10 @@
 <div>
   <mavon-editor v-if="show" :ijhljs="true" v-model="article.body"></mavon-editor>
   <input type="text" placeholder="title" v-model="article.title">
-  <input type="text" placeholder="state" v-model="article.state">
+  <select v-model="article.state">
+    <option value="publish">publish</option>
+    <option value="draft">draft</option>
+  </select>
   <input type="text" placeholder="category" v-model="article.category">
   <button @click="makeArticle">djfaosdijfa</button>
 </div>
@@ -19,8 +22,8 @@ if (process.browser) {
 export default {
   name: 'adminEdit',
   layout: 'admin',
-  asyncData () {
-    return {
+  async asyncData ({params}) {
+    const data = {
       show: false,
       article: {
         title: '',
@@ -33,9 +36,16 @@ export default {
         lastModified: null
       }
     }
+
+    if (params.id) {
+      const res = await axios.get('/api/admin/articles/' + params.id)
+      data.article = Object.assign(data.article, res.data[0])
+    }
+
+    return data
   },
   fetch ({store, redirect}) {
-    if (!store.state.authUser) {
+    if (process.env.NODE_ENV === 'production' && !store.state.authUser) {
       return redirect('/admin/login')
     }
   },
@@ -44,7 +54,11 @@ export default {
   },
   methods: {
     makeArticle () {
-      axios.post('/api/admin/articles', this.article)
+      let url = '/api/admin/articles'
+      if (this.$route.params.id) {
+        url += '/' + this.$route.params.id
+      }
+      axios.post(url, this.article)
         .then(() => {
           this.$toast.success(this.$t('poi'))
         })

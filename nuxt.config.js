@@ -20,8 +20,9 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/favicon.png' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Quicksand'}
-    ]
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Quicksand'},
+      { rel: 'stylesheet', href: '/vendor/prismjs/themes/prism.css'}
+    ],
   },
   /*
   ** Global CSS
@@ -67,8 +68,11 @@ module.exports = {
       {
         id: Client.ga
       }
-    ]
+    ],
+    '@nuxtjs/vendor'
   ],
+
+  vendor: ['prismjs'],
 
   env: {
     static: !!process.env.STATIC
@@ -83,12 +87,6 @@ module.exports = {
           })
         })
     }
-  },
-
-  minify: {
-    removeAttributeQuotes: true,
-    removeComments: true,
-    sortAttributes: false,
-    sortClassName: false
   }
+
 }

@@ -1,13 +1,29 @@
 <template>
 <div class="article-container">
   <h1 class="article-title">{{article.title}}</h1>
-  <vue-markdown :source="article.body" class="content"></vue-markdown>
+  <div class="content" v-html="parseMarkdown(article.body)"></div>
+  <nuxt-link v-if="$store.state.authUser" :to="'/admin/edit/' + $route.params.id">Edit</nuxt-link>
 </div>
 </template>
 
 <script>
 import axios from '~/plugins/axios'
-import VueMarkdown from 'vue-markdown'
+import MarkdownIt from 'markdown-it'
+import prism from 'markdown-it-prism'
+import hljs from 'highlight.js'
+const md = new MarkdownIt({
+  html: true,
+  breaks: true,
+  linkify: true,
+  highlight (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value
+      } catch (_) {}
+    }
+    return ''
+  }
+}).use(prism, {})
 
 export default {
   name: 'Post',
@@ -24,8 +40,10 @@ export default {
       title: this.article.title + ' | とーふとふのブログ'
     }
   },
-  components: {
-    VueMarkdown
+  methods: {
+    parseMarkdown (body) {
+      return md.render(body)
+    }
   }
 }
 </script>

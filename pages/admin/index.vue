@@ -1,11 +1,19 @@
 <template>
 <div>
-{{articles}}
+  <div class="admin-article-list" v-for="article in articles">
+    <nuxt-link :to="'/admin/edit/'+article.id">
+      <div>{{article.id}}</div>
+      <div>{{article.title || 'No title'}}</div>
+      <div>{{article.state}}</div>
+      <div>{{article.published | dateFormatter}}</div>
+    </nuxt-link>
+  </div>
 </div>
 </template>
 
 <script>
 import axios from '~/plugins/axios'
+import moment from 'moment'
 
 export default {
   name: 'adminIndex',
@@ -19,8 +27,13 @@ export default {
     }
   },
   fetch ({store, redirect}) {
-    if (!store.state.authUser) {
+    if (!process.env.NODE_ENV === 'production' && !store.state.authUser) {
       return redirect('/admin/login')
+    }
+  },
+  filters: {
+    dateFormatter (val) {
+      return moment(val).format('YYYY-MM-DD')
     }
   }
 }
