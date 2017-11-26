@@ -48,6 +48,8 @@ export default {
 <style >
 .container
 {
+  width: 100%;
+  max-width: 765px;
   padding: 60px 0 !important;
 }
 

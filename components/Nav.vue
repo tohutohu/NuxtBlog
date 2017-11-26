@@ -21,6 +21,7 @@
   border-bottom: none;
   padding: 0 20px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .my-nav-container {
