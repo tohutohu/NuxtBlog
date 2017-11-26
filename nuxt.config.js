@@ -22,7 +22,7 @@ module.exports = {
       { rel: 'icon', type: 'image/png', href: '/favicon.png' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Quicksand'},
       { rel: 'stylesheet', href: '/vendor/prismjs/themes/prism.css'}
-    ],
+    ]
   },
   /*
   ** Global CSS
