@@ -1,7 +1,7 @@
 <template>
 <div>
   <nuxt-link to="/admin">一覧に戻る</nuxt-link>
-  <nuxt-link :to="'/admin/preview/' + $route.params.id">プレビュー</nuxt-link>
+  <a @click="startPreview">プレビュー</a>
   <mavon-editor 
     v-if="show" 
     :ijhljs="false" 
@@ -68,20 +68,28 @@ export default {
     console.log(this)
   },
   methods: {
+    async startPreview () {
+      if (!this.$route.params.id) {
+        this.makeArticle()
+      } else {
+        this.$router.push('/admin/preview/' + this.$route.params.id)
+      }
+    },
     makeArticle () {
       let url = '/api/admin/articles'
       if (this.$route.params.id) {
         url += '/' + this.$route.params.id
       }
-      axios({
+      return axios({
         url: url,
         method: 'POST',
         withCredentials: true,
         data: this.article
 
       })
-        .then(() => {
+        .then((res) => {
           this.$toast.success('saved!')
+          this.$router.replace('/admin/edit/' + res.data.id)
         })
         .catch((err) => {
           console.log(err)
