@@ -4,14 +4,8 @@ const {Article} = require('../db/model')
 const multer = require('multer')
 const path = require('path')
 const mkdirp = require('mkdirp')
-let dest
-if (process.env.NODE_ENV === 'puroduction') {
-  dest = path.resolve(__dirname, '../../dist/images')
-  mkdirp.sync(dest)
-} else {
-  dest = path.resolve(__dirname, '../../static/images')
-  mkdirp.sync(dest)
-}
+let dest = path.resolve(__dirname, '../../static/images')
+mkdirp.sync(dest)
 const upload = multer({dest}).single('image')
 
 const local = `localhost:${Server.port}`
@@ -33,7 +27,6 @@ router.post('/logout', (req, res) => {
 })
 
 router.use((req, res, next) => {
-  console.log(req)
   if (req.headers.host !== local && !req.session.authUser) {
     res.status(401).json({error: 'authentication fail'})
     return

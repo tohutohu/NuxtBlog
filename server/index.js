@@ -18,8 +18,7 @@ app.use(session({
   saveUninitialized: true,
   rolling: true,
   cookie: {
-    maxAge: 60000,
-    secure: true
+    maxAge: 600000
   },
   store: new MongoStore({mongooseConnection: connection})
 }))
