@@ -72,6 +72,7 @@ export default {
       if (!this.$route.params.id) {
         this.makeArticle()
       } else {
+        await this.makeArticle()
         this.$router.push('/admin/preview/' + this.$route.params.id)
       }
     },
