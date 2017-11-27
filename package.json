@@ -31,6 +31,7 @@
     "markdown-it-imsize": "^2.0.1",
     "markdown-it-prism": "^1.1.1",
     "mavon-editor": "^2.4.0",
+    "mime": "^1.6.0",
     "mkdirp": "^0.5.1",
     "mkdirp-promise": "^5.0.1",
     "moment": "^2.19.2",

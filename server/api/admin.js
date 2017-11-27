@@ -3,10 +3,27 @@ const {Server} = require('../../config')
 const {Article} = require('../db/model')
 const multer = require('multer')
 const path = require('path')
+const mime = require('mime')
+const crypto = require('crypto')
 const mkdirp = require('mkdirp')
 let dest = path.resolve(__dirname, '../../static/images')
 mkdirp.sync(dest)
-const upload = multer({dest}).single('image')
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, dest)
+  },
+  filename: function (req, file, cb) {
+    crypto.pseudoRandomBytes(16, (err, raw) => {
+      if (err) {
+        cb(err, null)
+      }
+      cb(null, raw.toString('hex') + '.' + mime.extension(file.mimetype))
+    })
+  }
+})
+
+const upload = multer({storage}).single('image')
 
 const local = `localhost:${Server.port}`
 
