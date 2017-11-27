@@ -18,6 +18,7 @@ import moment from 'moment'
 export default {
   name: 'adminIndex',
   layout: 'admin',
+  middleware: 'authenticated',
   async asyncData () {
     const {data} = await axios({
       url: '/api/admin/articles',
@@ -26,11 +27,6 @@ export default {
     })
     return {
       articles: data
-    }
-  },
-  fetch ({store, redirect}) {
-    if (!store.state.authUser) {
-      return redirect('/admin/login')
     }
   },
   filters: {

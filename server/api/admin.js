@@ -65,7 +65,7 @@ router.get('/articles/:id', async (req, res) => {
     res.status(404).json({error: 'article not found'})
     return
   }
-  res.json(article)
+  res.json(article[0])
 })
 
 router.post('/articles/:id', async (req, res) => {

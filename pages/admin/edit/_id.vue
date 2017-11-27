@@ -1,6 +1,7 @@
 <template>
 <div>
   <nuxt-link to="/admin">一覧に戻る</nuxt-link>
+  <nuxt-link :to="'/admin/preview/' + $route.params.id">プレビュー</nuxt-link>
   <mavon-editor 
     v-if="show" 
     :ijhljs="false" 
@@ -30,6 +31,7 @@ if (process.browser) {
 export default {
   name: 'adminEdit',
   layout: 'admin',
+  middleware: 'authenticated',
   async asyncData ({params}) {
     const data = {
       show: false,
@@ -51,7 +53,7 @@ export default {
         withCredentials: true,
         method: 'GET'
       })
-      data.article = Object.assign(data.article, res.data[0])
+      data.article = Object.assign(data.article, res.data)
     }
 
     return data
