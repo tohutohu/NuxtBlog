@@ -12,7 +12,7 @@ router.get('/tags', async (req, res) => {
 
 router.get('/articles', async (req, res) => {
   const data = {
-    articles: await Article.find({state: 'publish'}).select({id: 1, title: 1, published: 1, category: 1, tags: 1, thumbnailURL: 1}).sort('published')
+    articles: await Article.find({state: 'publish'}).select({id: 1, title: 1, published: 1, category: 1, tags: 1, thumbnailURL: 1}).sort({published: -1})
   }
   res.json(data)
 })
