@@ -58,5 +58,9 @@ export default {
   font-size:18px;
 }
 
+img {
+  max-width: 90%;
+}
+
 </style>
 
