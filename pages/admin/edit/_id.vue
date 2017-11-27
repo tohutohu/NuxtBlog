@@ -1,6 +1,13 @@
 <template>
 <div>
-  <mavon-editor v-if="show" :ijhljs="true" v-model="article.body"></mavon-editor>
+  <mavon-editor 
+    v-if="show" 
+    :ijhljs="false" 
+    language="en"
+    @imgAdd="uploadImage"
+    @save="makeArticle"
+    v-model="article.body"
+  ></mavon-editor>
   <input type="text" placeholder="title" v-model="article.title">
   <select v-model="article.state">
     <option value="publish">publish</option>
@@ -51,6 +58,7 @@ export default {
   },
   mounted () {
     this.show = true
+    console.log(this)
   },
   methods: {
     makeArticle () {
@@ -60,11 +68,25 @@ export default {
       }
       axios.post(url, this.article)
         .then(() => {
-          this.$toast.success(this.$t('poi'))
+          this.$toast.success('saved!')
         })
         .catch((err) => {
           console.log(err)
           this.$toast.error(JSON.stringify(err))
+        })
+    },
+    uploadImage (pos, file) {
+      const formdata = new FormData()
+      formdata.append('image', file)
+      axios({
+        url: '/api/admin/image',
+        method: 'POST',
+        data: formdata,
+        headers: {'Content-Type': 'multipart/form-data'}
+      })
+        .then(res => {
+          console.log(res)
+          this.$children[0].$img2Url(pos, res.data.path)
         })
     }
   }

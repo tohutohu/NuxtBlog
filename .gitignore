@@ -17,3 +17,4 @@ build
 config.js
 
 static/vendor
+static/images

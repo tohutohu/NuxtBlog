@@ -10,19 +10,11 @@
 import axios from '~/plugins/axios'
 import MarkdownIt from 'markdown-it'
 import prism from 'markdown-it-prism'
-import hljs from 'highlight.js'
+
 const md = new MarkdownIt({
   html: true,
   breaks: true,
-  linkify: true,
-  highlight (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(lang, str).value
-      } catch (_) {}
-    }
-    return ''
-  }
+  linkify: true
 }).use(prism, {})
 
 export default {

@@ -1,6 +1,18 @@
 const { Router } = require('express')
 const {Server} = require('../../config')
 const {Article} = require('../db/model')
+const multer = require('multer')
+const path = require('path')
+const mkdirp = require('mkdirp')
+let dest
+if (process.env.NODE_ENV === 'puroduction') {
+  dest = path.resolve(__dirname, '../../dist/images')
+  mkdirp.sync(dest)
+} else {
+  dest = path.resolve(__dirname, '../../static/images')
+  mkdirp.sync(dest)
+}
+const upload = multer({dest}).single('image')
 
 const router = Router()
 
@@ -80,6 +92,16 @@ router.post('/articles/:id', async (req, res) => {
       $set: data
     })
   res.json(article)
+})
+
+router.post('/image', (req, res) => {
+  upload(req, res, err => {
+    if (err) {
+      res.status(500).json(err)
+    } else {
+      res.status(201).json({path: '/images/' + req.file.filename})
+    }
+  })
 })
 
 module.exports = router

@@ -32,7 +32,7 @@ module.exports = {
   ** Add axios globally
   */
   build: {
-    vendor: ['axios', 'vue-i18n', 'vue-markdown'],
+    vendor: ['axios', 'vue-i18n'],
     /*
     ** Run ESLINT on save
     */
