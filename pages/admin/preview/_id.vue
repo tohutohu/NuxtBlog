@@ -20,6 +20,7 @@ const md = new MarkdownIt({
 export default {
   name: 'Post',
   transition: 'slide-fade',
+  middleware: 'authenticated',
   async asyncData ({params, payload}) {
     if (payload) {
       return payload

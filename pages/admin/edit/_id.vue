@@ -109,7 +109,7 @@ export default {
       })
         .then(res => {
           console.log(res)
-          this.$children[0].$img2Url(pos, res.data.path)
+          this.$children[1].$img2Url(pos, res.data.path)
         })
     }
   }

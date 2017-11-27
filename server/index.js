@@ -14,11 +14,11 @@ const port = process.env.PORT || Server.port || 3000
 app.use(bodyParser.json())
 app.use(session({
   secret: 'aaa',
-  resave: false,
+  resave: true,
   saveUninitialized: true,
   rolling: true,
   cookie: {
-    maxAge: 600000
+    maxAge: 6000000
   },
   store: new MongoStore({mongooseConnection: connection})
 }))
