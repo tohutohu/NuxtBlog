@@ -17,7 +17,7 @@ const actions = {
         }
       })
       .then((authUser) => {
-        commit('SET_USER', authUser)
+        commit('SET_USER', true)
       })
   },
   logout ({commit}) {
@@ -35,15 +35,16 @@ const actions = {
         }
       })
       .then(() => {
-        commit('SET_USER', null)
+        commit('SET_USER', false)
       })
   }
 }
 
 if (!process.env.static) {
   actions.nuxtServerInit = ({ commit }, { req }) => {
+    console.log('nuxtServerInit', req.session.authUser)
     if (req.session && req.session.authUser) {
-      commit('SET_USER', req.session.authUser)
+      commit('SET_USER', true)
     }
   }
 }

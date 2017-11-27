@@ -45,14 +45,18 @@ export default {
     }
 
     if (params.id) {
-      const res = await axios.get('/api/admin/articles/' + params.id)
+      const res = await axios({
+        url: '/api/admin/articles/' + params.id,
+        withCredentials: true,
+        method: 'GET'
+      })
       data.article = Object.assign(data.article, res.data[0])
     }
 
     return data
   },
   fetch ({store, redirect}) {
-    if (process.env.NODE_ENV === 'production' && !store.state.authUser) {
+    if (!store.state.authUser) {
       return redirect('/admin/login')
     }
   },
@@ -66,7 +70,13 @@ export default {
       if (this.$route.params.id) {
         url += '/' + this.$route.params.id
       }
-      axios.post(url, this.article)
+      axios({
+        url: url,
+        method: 'POST',
+        withCredentials: true,
+        data: this.article
+
+      })
         .then(() => {
           this.$toast.success('saved!')
         })
@@ -82,6 +92,7 @@ export default {
         url: '/api/admin/image',
         method: 'POST',
         data: formdata,
+        withCredentials: true,
         headers: {'Content-Type': 'multipart/form-data'}
       })
         .then(res => {

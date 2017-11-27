@@ -42,4 +42,4 @@ const waitConnect = async () => {
   }
 }
 
-module.exports = {Article, waitConnect}
+module.exports = {Article, waitConnect, connection: mongo}

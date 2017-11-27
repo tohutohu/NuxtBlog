@@ -7,7 +7,7 @@ const createStore = () => {
     state: {
       locales: ['ja'],
       locale: 'ja',
-      authUser: null
+      authUser: false
     },
     mutations,
     actions

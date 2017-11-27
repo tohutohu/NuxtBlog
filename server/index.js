@@ -3,7 +3,8 @@ const { Nuxt, Builder, Generator } = require('nuxt')
 const {Server} = require('../config')
 const bodyParser = require('body-parser')
 const session = require('express-session')
-const {waitConnect} = require('./db/model')
+const MongoStore = require('connect-mongo')(session)
+const {waitConnect, connection} = require('./db/model')
 const api = require('./api')
 
 const app = express()
@@ -14,12 +15,13 @@ app.use(bodyParser.json())
 app.use(session({
   secret: 'aaa',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   rolling: true,
   cookie: {
     maxAge: 60000,
-    secure: false
-  }
+    secure: true
+  },
+  store: new MongoStore({mongooseConnection: connection})
 }))
 
 app.set('port', port)

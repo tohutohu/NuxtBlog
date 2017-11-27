@@ -20,14 +20,16 @@ export default {
   layout: 'admin',
   async asyncData () {
     const {data} = await axios({
-      url: '/api/admin/articles'
+      url: '/api/admin/articles',
+      method: 'GET',
+      withCredentials: true
     })
     return {
       articles: data
     }
   },
   fetch ({store, redirect}) {
-    if (!process.env.NODE_ENV === 'production' && !store.state.authUser) {
+    if (!store.state.authUser) {
       return redirect('/admin/login')
     }
   },
