@@ -1,5 +1,6 @@
 <template>
 <div>
+  <nuxt-link to="/admin">一覧に戻る</nuxt-link>
   <mavon-editor 
     v-if="show" 
     :ijhljs="false" 

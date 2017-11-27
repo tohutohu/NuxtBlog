@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="admin-article-list" v-for="article in articles">
-    <nuxt-link :to="'/admin/edit/'+article.id">
+    <nuxt-link class="admin-article-list-item" :to="'/admin/edit/'+article.id">
       <div>{{article.id}}</div>
       <div>{{article.title || 'No title'}}</div>
       <div>{{article.state}}</div>
@@ -35,6 +35,9 @@ export default {
   },
   filters: {
     dateFormatter (val) {
+      if (!moment(val).isValid()) {
+        return 'Not publish'
+      }
       return moment(val).format('YYYY-MM-DD')
     }
   }
@@ -42,6 +45,10 @@ export default {
 </script>
 
 <style>
+.admin-article-list-item {
+  display: flex;
+  margin-bottom: 12px;
+}
 
 </style>
 

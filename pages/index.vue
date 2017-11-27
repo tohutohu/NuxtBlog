@@ -4,9 +4,9 @@
       POSTS
     </h1>
     <div>
-      <div class="article-container top" v-for="article in articles">
+      <div class="top" v-for="article in articles">
         <nuxt-link :to="'/posts/' + article.id">
-          <div class="article-title">{{article.title}}</div>
+          <div class="top-article-title">{{article.title}}</div>
         </nuxt-link>
         <div class="article-tags" v-for="tag in article.tags" v-if="article.tags.length > 0">
           <div>{{tag}}</div>
@@ -52,13 +52,23 @@ export default {
   max-width: 765px;
   padding: 60px 0 !important;
 }
+
 .top {
+  padding: 12px 24px 18px 12px;
+  width: 100%;
+  max-width: 765px;
   padding-right: 0 !important;
   padding-left: 0 !important;
 }
 
+.top-article-title {
+  margin: 24px;
+  margin-bottom: 6px;
+  font-size: 18px;
+}
+
 .title {
-  padding-bottom: 25px;
+  padding-bottom: 24px;
 }
 
 </style>

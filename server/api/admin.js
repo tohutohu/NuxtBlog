@@ -74,6 +74,7 @@ router.post('/articles/:id', async (req, res) => {
     category: req.body.category,
     tags: req.body.tags,
     body: req.body.body,
+    state: req.body.state,
     thumbnailURL: req.body.thumbnailURL,
     lastModified: Date.now()
   }

@@ -42,7 +42,7 @@ export default {
 
 <style>
 .article-container {
-  padding: 12px 24px 18px 25px;
+  padding: 12px 24px 18px 24px;
   width: 100%;
   max-width: 765px;
 }
