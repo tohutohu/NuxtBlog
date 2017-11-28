@@ -1,12 +1,22 @@
 <template>
 <div>
-  <div class="admin-article-list" v-for="article in articles">
-    <nuxt-link class="admin-article-list-item" :to="'/admin/edit/'+article.id">
-      <div>{{article.id}}</div>
-      <div>{{article.title || 'No title'}}</div>
-      <div>{{article.state}}</div>
-      <div>{{article.published | dateFormatter}}</div>
-    </nuxt-link>
+  <div>
+    <div class="table-header">
+      <div class="table-article-id">ID</div>
+      <div class="table-article-title">Title</div>
+      <div class="table-article-state">State</div>
+      <div class="table-article-published">Published</div>
+    </div>
+    <div class="table-content" v-for="article in articles">
+      <div class="table-article-id">{{article.id}}</div>
+      <div class="table-article-title">
+        <nuxt-link class="admin-article-list-item" :to="'/admin/edit/'+article.id">
+          {{article.title || 'No title'}}
+        </nuxt-link>
+      </div>
+      <div class="table-article-state">{{article.state}}</div>
+      <div class="table-article-published">{{article.published | dateFormatter}}</div>
+    </div>
   </div>
 </div>
 </template>
@@ -46,5 +56,47 @@ export default {
   margin-bottom: 12px;
 }
 
+.table-header, 
+.table-content {
+  display: flex;
+  justify-content: center;
+  min-height: 36px;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.table-article-id {
+  width: 10%;
+  max-width: 72px;
+  min-width: 36px;
+  border: solid 1px #ccc;
+  display: flex;
+  justify-content: center;
+  content-align: center;
+  box-sizing: border-box;
+  padding: 3px;
+}
+
+.table-article-title{
+  width: 50%;
+  min-width: 120px;
+  border: solid 1px #ccc;
+  box-sizing: border-box;
+  padding: 3px;
+}
+
+.table-article-state {
+  width: 20%;
+  border: solid 1px #ccc;
+  box-sizing: border-box;
+  padding: 3px;
+}
+
+.table-article-published{
+  width: 30%;
+  border: solid 1px #ccc;
+  box-sizing: border-box;
+  padding: 3px;
+}
 </style>
 

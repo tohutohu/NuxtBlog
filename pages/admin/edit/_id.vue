@@ -1,23 +1,49 @@
 <template>
-<div>
-  <nuxt-link to="/admin">一覧に戻る</nuxt-link>
-  <a @click="startPreview">プレビュー</a>
-  <mavon-editor 
-    v-if="show" 
-    :ijhljs="false" 
-    language="en"
-    @imgAdd="uploadImage"
-    @save="makeArticle"
-    v-model="article.body"
-  ></mavon-editor>
-  <input type="text" placeholder="title" v-model="article.title">
-  <select v-model="article.state">
-    <option value="publish">publish</option>
-    <option value="draft">draft</option>
-  </select>
-  <input type="text" placeholder="category" v-model="article.category">
-  <button @click="makeArticle">djfaosdijfa</button>
-</div>
+  <div class="admin-edit-container">
+    <div class="admin-edit-menu">
+      <nuxt-link to="/admin">一覧に戻る</nuxt-link>
+      <a @click="startPreview">プレビュー</a>
+    </div>
+    <div>
+      <label>Title:</label>
+      <input type="text" placeholder="title" v-model="article.title">
+    </div>
+    <mavon-editor 
+      v-if="show" 
+      :ijhljs="false" 
+      language="en"
+      @imgAdd="uploadImage"
+      @save="makeArticle"
+      v-model="article.body"
+    ></mavon-editor>
+    <div class="admin-edit-input">
+      <label class="admin-edit-input-label">State:</label>
+      <select v-model="article.state">
+        <option value="publish">publish</option>
+        <option value="draft">draft</option>
+      </select>
+    </div>
+    <div class="admin-edit-input">
+      <label class="admin-edit-input-label">Category:</label>
+      <input type="text" placeholder="category" v-model="article.category">
+    </div>
+    <div transition="fade" v-if="!deleteTrigger" class="admin-edit-buttons">
+      <div class="admin-edit-input">
+        <button @click="makeArticle" class="square-button black hover-green">Save</button>
+      </div>
+      <div class="admin-edit-input">
+        <button @click="deleteTrigger = true" class="square-button black hover-red">Delete</button>
+      </div>
+    </div>
+    <div transition="fade" v-if="deleteTrigger" class="admin-edit-buttons">
+      <div class="admin-edit-input">
+        <button @click="makeArticle" class="square-button black hover-red">Delete</button>
+      </div>
+      <div class="admin-edit-input">
+        <button @click="deleteTrigger = false" class="square-button black">Cancel</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -35,6 +61,7 @@ export default {
   async asyncData ({params}) {
     const data = {
       show: false,
+      deleteTrigger: false,
       article: {
         title: '',
         category: '',
@@ -119,6 +146,33 @@ export default {
 </script>
 
 <style>
+.admin-edit-container {
+  padding: 6px;
+}
 
+.admin-edit-input {
+  margin-top: 6px;
+}
+
+.admin-edit-input-label {
+  margin-right: 12px;
+}
+
+.hover-green:hover {
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+.hover-red:hover {
+  background-color: #f00;
+  color: #fff;
+}
+
+.admin-edit-buttons {
+  display: flex;
+}
+.admin-edit-buttons>* {
+  width: 80px;
+}
 </style>
 

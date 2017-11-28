@@ -32,6 +32,17 @@ a, a:hover, a:focus, a:visited
   opacity: 0;
 }
 
+.fade-enter-active {
+  transition: all .3s ease;
+}
+.fade-leave-active {
+  transition: all .3s ease;
+}
+.fade-enter, .fade-leave-to {
+  transform: translateX(15px);
+  opacity: 0;
+}
+
 .square-button {
   display: inline-block;
   padding: 0.3em 1em;
