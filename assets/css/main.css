@@ -21,13 +21,6 @@ a, a:hover, a:focus, a:visited
   color: #000;
 }
 
-.logo {
-  width: 100%;
-  height: auto;
-  max-width: 400px;
-  max-height: 289px;
-}
-
 .slide-fade-enter-active {
   transition: all .3s ease;
 }
@@ -38,3 +31,25 @@ a, a:hover, a:focus, a:visited
   transform: translateX(15px);
   opacity: 0;
 }
+
+.square-button {
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+  border-radius: 3px;
+  transition: .4s;
+}
+
+.square-button:hover {
+  background: #67c5ff;
+  color: white;
+}
+
+.black {
+  background: #fff;
+  color: #000;
+  border-color: #000;
+}
+
