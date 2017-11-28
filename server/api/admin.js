@@ -95,7 +95,7 @@ router.post('/articles/:id', async (req, res) => {
     thumbnailURL: req.body.thumbnailURL,
     lastModified: Date.now()
   }
-  if (req.body.state === 'publish') {
+  if (req.body.oldState !== 'publish' && req.body.state === 'publish') {
     data.state = req.body.state
     data.published = Date.now()
   }

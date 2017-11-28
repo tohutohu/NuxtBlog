@@ -43,6 +43,7 @@ export default {
         thumbnailURL: '',
         published: null,
         state: 'draft',
+        oldState: '',
         lastModified: null
       }
     }
@@ -54,6 +55,7 @@ export default {
         method: 'GET'
       })
       data.article = Object.assign(data.article, res.data)
+      data.article.oldState = data.article.state
     }
 
     return data
