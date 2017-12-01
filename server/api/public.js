@@ -21,6 +21,11 @@ router.get('/articles/:id', async (req, res) => {
   const data = {
     article: await Article.findOne({id: req.params.id, state: 'publish'}).select({id: 1, title: 1, published: 1, category: 1, tags: 1, body: 1, thumbnailURL: 1})
   }
+  if (!data.article) {
+    console.log('Not found')
+    res.status(404).json({})
+    return
+  }
   res.json(data)
 })
 module.exports = router

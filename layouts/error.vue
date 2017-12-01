@@ -1,37 +1,68 @@
 <template>
-  <section class="container">
-    <img src="../assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-    <h1 class="title">
-      {{ error.statusCode }}
-    </h1>
-    <h2 class="info">
-      {{ error.message }}
-    </h2>
-    <nuxt-link class="button" to="/" v-if="error.statusCode === 404">
-      Homepage
-    </nuxt-link>
-  </section>
+  <div>
+    <my-header></my-header>
+    <div class="main">
+      <section class="container">
+        <h1 class="title">
+          お探しのページは見つかりませんでした
+        </h1>
+        <nuxt-link to="/">Topへ</nuxt-link>
+      </section>
+    </div>
+    <my-footer/>
+  </div>
 </template>
 <script>
+import MyFooter from '~/components/Footer.vue'
+import MyHeader from '~/components/Header.vue'
+
 export default {
-  props: ['error']
+  props: ['error'],
+  components: {
+    MyHeader,
+    MyFooter
+  }
 }
 </script>
 
-<style scoped>
+<style>
+.main {
+  display: flex;
+  justify-content: center;
+}
+.container
+{
+  margin: 0;
+  width: 100%;
+  padding: 100px 0;
+  text-align: center;
+}
+
+.button, .button:visited
+{
+  display: inline-block;
+  color: black;
+  letter-spacing: 1px;
+  background-color: #fff;
+  border: 2px solid #000;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 15px 45px;
+}
+
+.button:hover, .button:focus
+{
+  color: #fff;
+  background-color: #000;
+}
+
 .title
 {
-  margin-top: 15px;
-  font-size: 5em;
-}
-.info
-{
+  color: #000;
   font-weight: 300;
-  color: #9aabb1;
+  font-size: 2.5em;
   margin: 0;
 }
-.button
-{
-  margin-top: 50px;
-}
 </style>
+</script>
+

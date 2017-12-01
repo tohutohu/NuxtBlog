@@ -20,12 +20,20 @@ const md = new MarkdownIt({
 export default {
   name: 'Post',
   transition: 'slide-fade',
-  async asyncData ({params, payload}) {
+  validate ({params}) {
+    return !isNaN(params.id)
+  },
+  async asyncData ({params, payload, error}) {
     if (payload) {
       return payload
     }
-    const { data } = await axios.get('/api/articles/' + params.id)
-    return data
+
+    try {
+      const { data } = await axios.get('/api/articles/' + params.id)
+      return data
+    } catch (err) {
+      error({statusCode: 404})
+    }
   },
   head () {
     return {
