@@ -10,6 +10,7 @@
 import axios from '~/plugins/axios'
 import MarkdownIt from 'markdown-it'
 import prism from 'markdown-it-prism'
+import {Client} from '~/config'
 
 const md = new MarkdownIt({
   html: true,
@@ -30,7 +31,7 @@ export default {
   },
   head () {
     return {
-      title: this.article.title + ' | とーふとふのブログ'
+      title: this.article.title + ' | ' + Client.blog.name
     }
   },
   methods: {

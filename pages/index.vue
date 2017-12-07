@@ -22,6 +22,7 @@
 <script>
 import axios from '~/plugins/axios'
 import moment from 'moment'
+import {Client} from '~/config'
 
 export default {
   transition: 'slide-fade',
@@ -34,7 +35,7 @@ export default {
   },
   head () {
     return {
-      title: 'とーふとふのブログ'
+      title: Client.blog.name
     }
   },
   filters: {
